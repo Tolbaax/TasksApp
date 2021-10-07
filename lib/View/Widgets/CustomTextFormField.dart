@@ -4,7 +4,8 @@ class CustomTextFormField extends StatefulWidget {
   String? labelText;
   int? lines;
   var onTap;
-  CustomTextFormField({this.labelText,this.lines,this.onTap});
+  bool? readOnly;
+  CustomTextFormField({this.labelText,this.lines,this.onTap,this.readOnly});
   @override
   _CustomTextFormFieldState createState() => _CustomTextFormFieldState();
 }
@@ -17,6 +18,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       child: TextFormField(
         maxLines: widget.lines,
         onTap: widget.onTap,
+        readOnly: widget.readOnly==null?false:widget.readOnly!,
         decoration: InputDecoration(
             labelText: widget.labelText,
             border: OutlineInputBorder(

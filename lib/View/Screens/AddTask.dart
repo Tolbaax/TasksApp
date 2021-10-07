@@ -54,7 +54,7 @@ class _AddTaskState extends State<AddTask> {
                       Padding(
                         padding: const EdgeInsets.only(bottom: 33),
                         child: CustomTextFormField(labelText: 'Task Date',
-                        onTap:showDate,),
+                        onTap:showDate,readOnly: true,),
                       ),
                       CustomTextFormField(labelText: 'Task Description',lines: 3,),
                     ],
