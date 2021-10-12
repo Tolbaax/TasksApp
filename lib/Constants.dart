@@ -1,4 +1,4 @@
-const taskTitle ='Title';
+const taskTitle = 'Title';
 const taskDate = 'date';
 const taskDesc = 'desc';
 const taskImportance = 'importance';

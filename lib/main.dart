@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:task/View/Screens/AddTask.dart';
 import 'package:task/View/Screens/HomeScreen.dart';
 
-void main()
-{
+void main() {
   runApp(MyTask());
 }
 
@@ -13,14 +12,12 @@ class MyTask extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(
-        primarySwatch: Colors.deepPurple
-      ),
+      theme: ThemeData(primarySwatch: Colors.deepPurple),
       debugShowCheckedModeBanner: false,
       initialRoute: HomeScreen.id,
       routes: {
-        HomeScreen.id:(context)=>HomeScreen(),
-        AddTask.id:(context)=>AddTask(),
+        HomeScreen.id: (context) => HomeScreen(),
+        AddTask.id: (context) => AddTask(),
       },
     );
   }
