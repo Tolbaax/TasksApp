@@ -12,7 +12,6 @@ class DBHelper {
   factory DBHelper() {
     return _db;
   }
-  //CRUD
   Database? _database;
   Future<Database> get db async {
     if (_database != null) return _database!;
@@ -24,6 +23,7 @@ class DBHelper {
     Directory directory = await getApplicationDocumentsDirectory();
     String path = directory.path + 'Tasks';
     final taskList = await openDatabase(path, version: 1, onCreate: _create);
+    return taskList;
   }
 
   void _create(Database db, int version) async {
@@ -35,4 +35,6 @@ class DBHelper {
         '$taskImportance TEXT,'
         '$taskStatus TEXT)');
   }
+
+  //CRUD
 }
