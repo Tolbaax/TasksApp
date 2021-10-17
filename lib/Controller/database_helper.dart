@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:task/Constants.dart';
+import 'package:task/Model/Task.dart';
 
 class DBHelper {
   //Design Pattern
@@ -35,6 +36,33 @@ class DBHelper {
         '$taskImportance TEXT,'
         '$taskStatus TEXT)');
   }
+  //CRUD create read update delete
+insertTask(TaskModel task)async
+{
+  Database dbb = await db;
+  dbb.insert('Tasks', task.toJson(),conflictAlgorithm: ConflictAlgorithm.replace);
+}
 
-  //CRUD
+
+
+//delete -------------------------------
+
+deleteTask(TaskModel delete)async
+{
+  Database del = await db;
+  del.delete('Tasks',where: '$taskId = ?',whereArgs: [delete.id]);
+}
+
+
+
+//update --------------------------------
+
+updateTask(TaskModel update)async
+{
+  Database upd = await db;
+  upd.update('Tasks',update.toJson(),whereArgs: [update.id],where: '$taskId =?');
+}
+
+//Read ---------------------------------
+
 }

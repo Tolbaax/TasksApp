@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:task/Controller/database_helper.dart';
+import 'package:task/Model/Task.dart';
 import 'package:task/View/Widgets/CustomTextFormField.dart';
 
 class AddTask extends StatefulWidget {
@@ -11,17 +12,20 @@ class AddTask extends StatefulWidget {
 }
 
 class _AddTaskState extends State<AddTask> {
+  TextEditingController controller = TextEditingController();
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  int? gValue;
   List<String> h = ['High', 'Intermediate', 'Low'];
   DateTime date = DateTime.now();
   DBHelper db = DBHelper();
+  String? description = '';
+  String? importance;
+  String? title = '';
+  int? gValue;
   showDate() async {
-    await showDatePicker(
-        context: context,
-        initialDate: date,
-        firstDate: DateTime(1999),
-        lastDate: DateTime(2030));
+   DateTime? dateTime = await showDatePicker(context: context, initialDate: date, firstDate: DateTime(1999), lastDate: DateTime(2030));
+   setState(() {
+     controller.text = dateTime.toString();
+   });
   }
 
   @override
@@ -62,6 +66,16 @@ class _AddTaskState extends State<AddTask> {
                             padding: const EdgeInsets.only(bottom: 33),
                             child: CustomTextFormField(
                               labelText: 'Task Title',
+                              onSaved: (v) {
+                                title = v;
+                              },
+                              validator: (v)
+                              {
+                                if(v == null)
+                                  {
+                                    return 'Please Enter Title';
+                                  }
+                              },
                             ),
                           ),
                           Padding(
@@ -70,11 +84,15 @@ class _AddTaskState extends State<AddTask> {
                               labelText: 'Task Date',
                               onTap: showDate,
                               readOnly: true,
+                              controller: controller,
                             ),
                           ),
                           CustomTextFormField(
                             labelText: 'Task Description',
                             lines: 3,
+                            onSaved: (v) {
+                              description = v;
+                            },
                           ),
                         ],
                       )),
@@ -96,6 +114,7 @@ class _AddTaskState extends State<AddTask> {
                                 onChanged: (v) {
                                   setState(() {
                                     gValue = index;
+                                    importance = h[index];
                                   });
                                 }),
                             Text(h[index]),
@@ -108,6 +127,11 @@ class _AddTaskState extends State<AddTask> {
                 ),
                 InkWell(
                   onTap: () {
+                    if(formKey.currentState!.validate())
+                      {
+                        formKey.currentState!.save();
+                        db.insertTask(TaskModel(title: title, status: '0', importance: importance, desc: description, id: 1, date: '55S'));
+                      }
                   },
                   child: Container(
                     height: 55,
