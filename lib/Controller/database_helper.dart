@@ -7,8 +7,7 @@ import 'package:task/Model/Task.dart';
 class DBHelper {
   //Design Pattern
   DBHelper._();
-  static final DBHelper _db = DBHelper
-      ._(); // Singleton is a creational design pattern that ensures that a class has only one instance and also provides a global point of access to it
+  static final DBHelper _db = DBHelper._(); // Singleton is a creational design pattern that ensures that a class has only one instance and also provides a global point of access to it
 
   factory DBHelper() {
     return _db;
@@ -50,7 +49,7 @@ insertTask(TaskModel task)async
 deleteTask(TaskModel delete)async
 {
   Database del = await db;
-  del.delete('Tasks',where: '$taskId = ?',whereArgs: [delete.id]);
+  del.delete('Tasks',where: '$taskId=?',whereArgs: [delete.id]);
 }
 
 
@@ -60,9 +59,14 @@ deleteTask(TaskModel delete)async
 updateTask(TaskModel update)async
 {
   Database upd = await db;
-  upd.update('Tasks',update.toJson(),whereArgs: [update.id],where: '$taskId =?');
+  upd.update('Tasks',update.toJson(),whereArgs: [update.id],where: '$taskId=?');
 }
 
 //Read ---------------------------------
-
+ Future<List<TaskModel>> getAllTasks()async
+{
+  Database read = await db;
+   List<Map<String,dynamic>> maps = await read.query('Tasks');
+   return maps.map((e) => TaskModel.fromJson(e)).toList();
+}
 }

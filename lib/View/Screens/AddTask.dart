@@ -71,7 +71,7 @@ class _AddTaskState extends State<AddTask> {
                               },
                               validator: (v)
                               {
-                                if(v == null)
+                                if(title == null)
                                   {
                                     return 'Please Enter Title';
                                   }
@@ -128,10 +128,10 @@ class _AddTaskState extends State<AddTask> {
                 InkWell(
                   onTap: () {
                     if(formKey.currentState!.validate())
-                      {
-                        formKey.currentState!.save();
-                        db.insertTask(TaskModel(title: title, status: '0', importance: importance, desc: description, id: 1, date: '55S'));
-                      }
+                    {
+                      formKey.currentState!.save();
+                      db.insertTask(TaskModel(title: title, status: '0', importance: importance, desc: description, id: 1, date: '55S'));
+                    }
                   },
                   child: Container(
                     height: 55,
