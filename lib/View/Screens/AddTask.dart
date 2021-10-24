@@ -129,7 +129,7 @@ class _AddTaskState extends State<AddTask> {
                     if(formKey.currentState!.validate())
                     {
                       formKey.currentState!.save();
-                      db.insertTask(TaskModel(title: title, status: '0', importance: importance, desc: description, id: 1, date: '55S'));
+                      db.insertTask(TaskModel(title: title, status: '0', importance: importance, desc: description,date: date.toString()));
                     }
                   },
                   child: Container(
