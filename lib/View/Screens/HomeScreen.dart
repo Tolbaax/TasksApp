@@ -87,7 +87,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                   await dbHelper.deleteTask(tasks[index]);
                                 },
                                 child: Icon(Icons.delete)),
-                            Text(tasks[index].date.toString(),style: TextStyle(color: Colors.white,fontSize: 20,fontWeight: FontWeight.w600),),
                           ],
                         ),
                       ],

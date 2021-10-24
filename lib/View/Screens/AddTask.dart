@@ -19,7 +19,7 @@ class _AddTaskState extends State<AddTask> {
   DBHelper db = DBHelper();
   String? description = '';
   String? importance;
-  String? title = '';
+  String? title;
   int? gValue;
   showDate() async {
    DateTime? dateTime = await showDatePicker(context: context, initialDate: date, firstDate: DateTime(1999), lastDate: DateTime(2030));
@@ -70,8 +70,7 @@ class _AddTaskState extends State<AddTask> {
                                 title = v;
                               },
                               validator: (v)
-                              {
-                                if(title == null)
+                              {if(v.toString().isEmpty)
                                   {
                                     return 'Please Enter Title';
                                   }
