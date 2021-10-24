@@ -34,7 +34,7 @@ class _HomeScreenState extends State<HomeScreen> {
         onPressed: () {
           Navigator.pushNamed(context, AddTask.id);
         },
-        backgroundColor: Colors.deepPurpleAccent,
+        backgroundColor: Colors.deepPurple,
         child: Icon(Icons.add),
       ),
       appBar: AppBar(
